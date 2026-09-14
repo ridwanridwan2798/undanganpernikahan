@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Ical & Nurul</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    <title>Undangan Pernikahan Mewah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #d4af37;
@@ -13,238 +13,115 @@
             --text-dark: #333333;
         }
 
-        * {
-            box-sizing: border-box;
-            scrollbar-width: none;
-        }
-        *::-webkit-scrollbar {
-            display: none;
-        }
+        * { box-sizing: border-box; scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
 
         body {
-            margin: 0; padding: 0;
-            background-color: #0a0a0a;
+            margin: 0; padding: 0; background-color: #0a0a0a;
             background-image: radial-gradient(circle, #2a2d34 0%, #0a0a0a 100%);
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+            min-height: 100vh; overflow: hidden;
             font-family: 'Montserrat', sans-serif;
         }
 
         .scale-wrapper {
-            position: relative;
-            transition: transform 0.5s ease;
+            position: relative; transition: transform 0.8s ease;
             display: flex; justify-content: center; align-items: center;
         }
 
+        /* Buku Induk */
         .book {
-            width: 320px;
-            height: 520px;
-            position: relative;
+            width: 320px; height: 520px; position: relative;
             perspective: 1500px;
             transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
-        .book.open {
-            transform: translateX(160px);
-        }
-
         .page {
-            width: 100%; height: 100%;
-            position: absolute; top: 0; left: 0;
-            transform-origin: left center;
-            transform-style: preserve-3d;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+            transform-origin: left center; transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
-        .page.flipped {
-            transform: rotateY(-180deg);
-        }
+        .page.flipped { transform: rotateY(-180deg); }
 
         .front, .back {
             position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden;
-            background-color: var(--light-bg);
+            backface-visibility: hidden; background-color: var(--light-bg);
             overflow-y: auto; overflow-x: hidden;
         }
 
         .front {
-            border-radius: 2px 12px 12px 2px;
-            border-left: 2px solid #ddd;
+            border-radius: 2px 12px 12px 2px; border-left: 2px solid #ddd;
             box-shadow: inset 10px 0 20px rgba(0,0,0,0.03), 5px 5px 15px rgba(0,0,0,0.3);
         }
 
         .back {
-            transform: rotateY(180deg);
-            border-radius: 12px 2px 2px 12px;
+            transform: rotateY(180deg); border-radius: 12px 2px 2px 12px;
             border-right: 2px solid #ddd;
             box-shadow: inset -10px 0 20px rgba(0,0,0,0.03), -5px 5px 15px rgba(0,0,0,0.3);
         }
 
-        .page-content {
-            padding: 25px 20px;
-            text-align: center;
-            height: 100%;
+        .page-content { padding: 25px 20px; text-align: center; height: 100%; }
+
+        /* --- HIASAN SULUR DAUN MEMANJANG DI TEPI HALAMAN --- */
+        .front::before {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 28px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 120'%3E%3Cg stroke='%23d4af37' stroke-width='1.2' fill='none' opacity='0.7'%3E%3Cpath d='M15,0 Q28,30 15,60 T15,120'/%3E%3Cpath d='M16,30 Q28,20 25,35 Q18,40 16,30' fill='%23d4af37' opacity='0.6'/%3E%3Cpath d='M16,40 Q25,35 22,45 Q16,50 16,40' fill='%23d4af37' opacity='0.4'/%3E%3Cpath d='M14,90 Q2,80 5,95 Q12,100 14,90' fill='%23d4af37' opacity='0.6'/%3E%3Cpath d='M14,100 Q5,95 8,105 Q14,110 14,100' fill='%23d4af37' opacity='0.4'/%3E%3Ccircle cx='22' cy='22' r='1.5' fill='%23d4af37'/%3E%3Ccircle cx='8' cy='82' r='1.5' fill='%23d4af37'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat-y; background-size: 100% auto; pointer-events: none; z-index: 10;
+        }
+        .back::before {
+            content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 28px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 120'%3E%3Cg stroke='%23d4af37' stroke-width='1.2' fill='none' opacity='0.7'%3E%3Cpath d='M15,0 Q28,30 15,60 T15,120'/%3E%3Cpath d='M16,30 Q28,20 25,35 Q18,40 16,30' fill='%23d4af37' opacity='0.6'/%3E%3Cpath d='M16,40 Q25,35 22,45 Q16,50 16,40' fill='%23d4af37' opacity='0.4'/%3E%3Cpath d='M14,90 Q2,80 5,95 Q12,100 14,90' fill='%23d4af37' opacity='0.6'/%3E%3Cpath d='M14,100 Q5,95 8,105 Q14,110 14,100' fill='%23d4af37' opacity='0.4'/%3E%3Ccircle cx='22' cy='22' r='1.5' fill='%23d4af37'/%3E%3Ccircle cx='8' cy='82' r='1.5' fill='%23d4af37'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat-y; background-size: 100% auto; pointer-events: none; z-index: 10; transform: scaleX(-1);
         }
 
-        .title-gold {
-            font-family: 'Playfair Display', serif;
-            color: var(--gold);
-            font-size: 1.1rem;
-            margin: 0 0 15px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        /* --- STYLING TEKS & ELEMEN --- */
+        .title-gold { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .arabic { font-family: 'Amiri', serif; color: var(--text-dark); }
+        .quran-text { font-size: 0.7rem; color: #555; line-height: 1.5; font-style: italic; }
 
-        .arabic {
-            font-family: 'Amiri', serif;
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
+        /* Sampul Depan */
+        .cover-design { background-color: var(--dark-bg); color: var(--gold); border: 6px solid #282b30; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .cover-design::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 1px solid var(--gold); pointer-events: none; border-radius: 2px 8px 8px 2px; }
+        .cover-photo { width: 170px; height: 230px; object-fit: cover; border-radius: 90px 90px 0 0; border: 2px solid var(--gold); margin: 15px 0; }
+        .couple-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0; color: var(--gold); font-weight: 600; }
 
-        .quran-text {
-            font-size: 0.7rem; color: #555;
-            line-height: 1.4; margin-bottom: 15px; font-style: italic;
-        }
-
-        .cover-design {
-            background-color: var(--dark-bg);
-            color: var(--gold);
-            border: 6px solid #282b30;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-        
-        .cover-design::before {
-            content: ''; position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid var(--gold);
-            pointer-events: none; border-radius: 2px 8px 8px 2px;
-        }
-
-        .cover-photo {
-            width: 180px; height: 230px;
-            object-fit: cover;
-            border-radius: 90px 90px 0 0;
-            border: 2px solid var(--gold);
-            margin: 15px 0;
-        }
-
-        .couple-name {
-    		font-family: 'Playfair Display', serif;
-    		font-size: 2.2rem; /* Ukuran saya kecilkan sedikit agar lebih pas dan elegan */
-    		margin: 0; 
-    		color: var(--gold);
-    		font-weight: 600; /* Menambahkan ketebalan huruf */
-	}
-
-        .couple-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
+        /* Foto Mempelai */
+        .couple-row { display: flex; justify-content: space-between; align-items: center; margin: 15px 0; }
         .profile-col { width: 45%; }
-        
-        .profile-col img {
-            width: 70px; height: 70px;
-            border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--gold); padding: 2px;
-        }
-
-        .profile-col h3 {
-    		font-family: 'Playfair Display', serif;
-    		font-size: 1.2rem; /* Dikecilkan sedikit agar rapi */
-    		color: var(--text-dark);
-    		margin: 5px 0;
-    		font-weight: 600;
-	}
-
+        .profile-col img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); padding: 2px; }
+        .profile-col h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-dark); margin: 5px 0; font-weight: 600;}
         .profile-col p { font-size: 0.65rem; color: #666; margin: 0; line-height: 1.3;}
-        .divider-and { font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold); }
+        .divider-and { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); }
 
-        .event-box {
-            background: #fff; padding: 15px;
-            border-radius: 8px; border: 1px solid #eee;
-            margin-bottom: 15px;
-        }
-        .event-box h4 {
-            font-family: 'Playfair Display', serif; margin: 0 0 10px 0; font-size: 1rem;
-        }
+        /* Acara */
+        .event-box { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 15px; }
+        .event-box h4 { font-family: 'Playfair Display', serif; margin: 0 0 10px 0; font-size: 1rem; }
         .event-box p { font-size: 0.8rem; color: #555; margin: 5px 0; }
+        .map-container iframe { width: 100%; height: 140px; border: none; border-radius: 8px; }
+
+        /* RSVP */
+        .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 0.75rem; }
+        .guestbook { margin-top: 10px; max-height: 85px; overflow-y: auto; text-align: left; border-top: 1px dashed #ddd; padding-top: 10px; }
+        .wish-item { background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.7rem; border-left: 3px solid var(--gold); }
+        .badge { background: #eee; padding: 3px 6px; border-radius: 4px; font-size: 0.55rem; float: right; color: #555; }
+
+        /* Tombol & Navigasi */
+        .btn-group { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: auto; }
+        .btn { display: inline-block; padding: 10px 15px; width: 100%; background-color: var(--gold); color: #fff; border-radius: 30px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; font-weight: 600; margin-top: 0; }
+        .btn-outline { background-color: transparent; border: 1px solid var(--text-dark); color: var(--text-dark); }
         
-        .map-container iframe {
-            width: 100%; height: 130px; border: none; border-radius: 8px;
+        /* Logika Visibilitas Tombol (Mobile vs Desktop) */
+        .mobile-only { display: none; }
+        @media (max-width: 700px) {
+            .mobile-only { display: block; }
         }
 
-        .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
-            width: 100%; padding: 10px; margin-bottom: 10px;
-            border: 1px solid #ddd; border-radius: 6px;
-            font-family: inherit; font-size: 0.8rem;
-        }
-        .rsvp-form input:focus, .rsvp-form textarea:focus { outline: 1px solid var(--gold); }
-        
-        .guestbook {
-            margin-top: 15px; max-height: 140px; overflow-y: auto;
-            text-align: left; border-top: 1px dashed #ddd; padding-top: 10px;
-        }
-        .wish-item {
-            background: #f9f9f9; padding: 10px; border-radius: 6px;
-            margin-bottom: 8px; font-size: 0.75rem; border-left: 3px solid var(--gold);
-        }
-        .wish-item strong { color: var(--text-dark); }
-        .badge {
-            background: #eee; padding: 3px 6px; border-radius: 4px;
-            font-size: 0.6rem; float: right; color: #555;
-        }
-
-        .btn {
-            display: inline-block; padding: 10px 15px; width: 100%;
-            background-color: var(--gold); color: #fff; border-radius: 30px;
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            border: none; cursor: pointer; font-weight: 600;
-            transition: 0.3s; margin-top: 10px;
-        }
-        .btn:hover { background-color: #b8962c; }
-        .btn-outline {
-            background-color: transparent; border: 1px solid var(--text-dark);
-            color: var(--text-dark);
-        }
-/* Tombol Musik Melayang */
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: var(--gold);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            animation: spin 4s linear infinite;
-            animation-play-state: paused; /* Bawaan berhenti sebelum dibuka */
-        }
-
-        .music-control.playing {
-            animation-play-state: running;
-        }
-
-        /* Animasi Berputar */
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        .music-control svg {
-            width: 20px;
-            height: 20px;
-            fill: #fff;
-        }
+        /* Musik Control */
+        .music-control { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background-color: var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); animation: spin 4s linear infinite; animation-play-state: paused; }
+        .music-control.playing { animation-play-state: running; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .music-control svg { width: 20px; height: 20px; fill: #fff; }
     </style>
 </head>
 <body>
@@ -252,185 +129,248 @@
     <div class="scale-wrapper" id="scaleWrapper">
         <div class="book" id="book">
             
-            <!-- HALAMAN 3 (RSVP) -->
-            <div class="page" id="page3" style="z-index: 1;">
-                <div class="front page-content">
+            <!-- HALAMAN 4 (Paling Bawah - Terima Kasih) -->
+            <div class="page" id="page4" style="z-index: 1;">
+                <div class="front page-content" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h2 class="title-gold" style="font-size: 1.4rem; margin-bottom: 20px;">Terima Kasih</h2>
+                    <p style="font-size: 0.8rem; color: #555; line-height: 1.6; margin-bottom: 30px;">
+                        Doa restu Anda adalah kado terindah bagi kami.
+                    </p>
+                    <div class="btn-group">
+                        <button class="btn btn-outline mobile-only" onclick="panTo('left')">⬅️ Geser Halaman Kiri</button>
+                        <button class="btn" onclick="closeAll()" style="background-color: #222;">Tutup Undangan</button>
+                        <button class="btn btn-outline" onclick="prevPage('page3')" style="border:none;">Kembali</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 3 (RSVP & Foto Penutup) -->
+            <div class="page" id="page3" style="z-index: 2;">
+                <!-- Kanan: Form RSVP -->
+                <div class="front page-content" style="display: flex; flex-direction: column;">
                     <h2 class="title-gold">RSVP & Ucapan</h2>
-                    <p style="font-size: 0.75rem; margin-bottom: 15px;">Kehadiran & doa restu Anda sangat berarti bagi kami.</p>
-                    
                     <form class="rsvp-form" onsubmit="submitRSVP(event)">
                         <input type="text" id="nama" placeholder="Nama Anda" required>
                         <select id="hadir">
                             <option value="Hadir">Akan Hadir</option>
-                            <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
                         </select>
-                        <textarea id="ucapan" rows="2" placeholder="Tulis doa & ucapan..." required></textarea>
-                        <button type="submit" class="btn">Kirim Pesan</button>
+                        <textarea id="ucapan" rows="2" placeholder="Tulis ucapan..." required></textarea>
+                        <button type="submit" class="btn" style="padding: 8px;">Kirim Pesan</button>
                     </form>
-
-                    <!-- Data Keluarga Budi sudah dihapus, div guestbook dibiarkan kosong -->
-                    <div class="guestbook" id="guestbook-list">
+                    <div class="guestbook" id="guestbook-list"></div>
+                    
+                    <div class="btn-group" style="margin-top: 15px;">
+                        <button class="btn btn-outline mobile-only" onclick="panTo('left')">⬅️ Geser Halaman Kiri</button>
+                        <button class="btn" onclick="openBook('page3')">Selesai ➡️</button>
+                        <button class="btn btn-outline" onclick="prevPage('page2')" style="border:none;">Kembali</button>
                     </div>
                 </div>
-            </div>
 
-            <!-- HALAMAN 2 (Detail Acara & Galeri/Penutup) -->
-            <div class="page" id="page2" style="z-index: 2;">
-                <!-- Sisi Depan -->
-                <div class="front page-content">
-                    <h2 class="title-gold">Detail Acara</h2>
-                    
-                    <div class="event-box">
-                        <h4>Akad Nikah & Resepsi</h4>
-                        <p><strong>SENIN, 21 September 2026</strong></p>
-                        <p>Pukul 10:00 WITA - Selesai</p>
-                        <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
-                        <p><strong>Alamat</p>
-						<p><strong>JL.POROS TUTAR, SALUTENGNGE</strong><br>Batupanga Daala, Luyo, Polman</p>
-                    </div>
-
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d208.10204585698165!2d119.10238185099172!3d-3.3224792557423615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1789350464978!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                    </div>
-
-                    <button class="btn" onclick="flipNext('page2')">Isi Kehadiran (RSVP)</button>
-                </div>
-
-                <!-- Sisi Belakang (Tanpa Scroll) -->
-                <div class="back page-content" style="display: flex; flex-direction: column; justify-content: center; padding: 15px 20px;">
-                    
-                    <!-- FOTO LOKAL KE-4: PENUTUP -->
-                    <img src="penutup2.jpeg" alt="Terima Kasih" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
-                    
-                    <h2 class="title-gold" style="margin-bottom: 5px; font-size: 1rem;">Terima Kasih</h2>
-                    
-                    <p style="font-size: 0.75rem; color: #555; line-height: 1.4; margin: 5px 0 15px 0;">
+                <!-- Kiri: Foto Penutup -->
+                <div class="back page-content" style="display: flex; flex-direction: column; justify-content: center; padding: 20px;">
+                    <img src="penutup.jpg" alt="Terima Kasih" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="font-size: 0.75rem; color: #555; line-height: 1.5; font-style: italic;">
                         "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu."
                     </p>
-                    
-                    <button class="btn btn-outline" onclick="flipPrev('page2')" style="margin-top: 0; padding: 8px 15px;">Kembali ke Acara</button>
-                    <button class="btn btn-outline" onclick="closeAll()" style="margin-top: 8px; padding: 8px 15px; border: none; color: #999;">Tutup Undangan</button>
-                    
+                    <div style="margin-top: 25px;">
+                        <button class="btn mobile-only" onclick="panTo('right')">Tutup Buku ➡️</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- HALAMAN 1 (Sampul Depan & Profil Islami) -->
-            <div class="page" id="page1" style="z-index: 3;">
-                
-                <!-- Sisi Depan -->
-                <div class="front cover-design page-content">
-                    <p style="font-family: 'Playfair Display'; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px;">WEDDING INVITATION</p>
-                    
-                    <!-- FOTO LOKAL KE-1: SAMPUL -->
-                    <img src="sampul.jpeg" alt="Cover Photo" class="cover-photo">
-                    
-                    <h2 class="couple-name">ICAL & NURUL</h2>
-                    
-                    <button class="btn" onclick="flipNext('page1')" style="margin-top: 30px;">Buka Undangan</button>
-                </div>
-
-                <!-- Sisi Belakang -->
-                <div class="back page-content">
-                    <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
-                    <p class="quran-text">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya..." <br><strong>(QS. Ar-Rum: 21)</strong></p>
-                    
-                    <p style="font-size: 0.75rem; color: #444; margin-bottom: 15px;">Assalamu'alaikum Warahmatullahi Wabarakatuh.<br>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+            <!-- HALAMAN 2 (Profil & Acara) -->
+            <div class="page" id="page2" style="z-index: 3;">
+                <!-- Kanan: Profil Mempelai (JULIET DULUAN) -->
+                <div class="front page-content" style="display: flex; flex-direction: column;">
+                    <h2 class="title-gold">Sang Mempelai</h2>
+                    <p style="font-size: 0.75rem; color: #444; margin-bottom: 15px;">Assalamu'alaikum Warahmatullahi Wabarakatuh.<br>Dengan memohon rahmat dan ridho Allah, kami bermaksud menyelenggarakan pernikahan:</p>
                     
                     <div class="couple-row">
+                        <!-- Profil Wanita di Kiri -->
                         <div class="profile-col">
-                            <!-- FOTO LOKAL KE-2: WANITA -->
-                            <img src="wanita.jpeg" alt="Mempelai Wanita">
-                            <h3>NURUL ALQAUZAR</h3>
-                            <p>Putri ke-2 dari<br>Bpk Bakhtiar & Ibu Darma. S</p>
+                            <img src="wanita.jpg" alt="Mempelai Wanita">
+                            <h3>Juliet</h3>
+                            <p>Putri dari<br>Bpk Ahmad & Ibu Fatimah</p>
                         </div>
-                        
                         <div class="divider-and">&</div>
-
+                        <!-- Profil Pria di Kanan -->
                         <div class="profile-col">
-                            <!-- FOTO LOKAL KE-3: PRIA -->
-                            <img src="pria.jpeg" alt="Mempelai Pria">
-                            <h3>ICAL</h3>
-                            <p>Putra ke-2 dari<br>Bpk Hamiruddin & Ibu Anti</p>
+                            <img src="pria.jpg" alt="Mempelai Pria">
+                            <h3>Romeo</h3>
+                            <p>Putra dari<br>Bpk Fulan & Ibu Fulana</p>
                         </div>
                     </div>
 
-                    <button class="btn btn-outline" style="margin-top: 20px;" onclick="flipPrev('page1')">Kembali ke Sampul</button>
+                    <div class="btn-group">
+                        <button class="btn btn-outline mobile-only" onclick="panTo('left')">⬅️ Geser Halaman Kiri</button>
+                        <button class="btn" onclick="openBook('page2')">Lihat Acara ➡️</button>
+                        <button class="btn btn-outline" onclick="prevPage('page1')" style="border:none;">Tutup Halaman</button>
+                    </div>
                 </div>
 
+                <!-- Kiri: Detail Acara -->
+                <div class="back page-content" style="display: flex; flex-direction: column;">
+                    <h2 class="title-gold">Detail Acara</h2>
+                    <div class="event-box">
+                        <h4>Akad Nikah & Resepsi</h4>
+                        <p><strong>Minggu, 14 September 2026</strong></p>
+                        <p>09:00 WITA - Selesai</p>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+                        <p><strong>Gedung Manunggal</strong><br>Jl. Jend. Sudirman, Makassar</p>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1s0x2db4c442a5c404c5%3A0x6335123d47d6e43e!2sMakassar%2C%20Makassar%20City%2C%20South%20Sulawesi!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    
+                    <div style="margin-top: auto;">
+                        <button class="btn mobile-only" onclick="panTo('right')">Isi RSVP ➡️</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- HALAMAN 1 (Sampul & Al-Qur'an) -->
+            <div class="page" id="page1" style="z-index: 4;">
+                <!-- Kanan: Sampul Utama (JULIET DULUAN) -->
+                <div class="front cover-design page-content">
+                    <p style="font-family: 'Playfair Display'; letter-spacing: 2px; font-size: 0.75rem; margin-bottom: 5px;">WEDDING INVITATION</p>
+                    <img src="sampul.jpg" alt="Cover Photo" class="cover-photo">
+                    <h2 class="couple-name">Juliet & Romeo</h2>
+                    <button class="btn" onclick="openBook('page1')" style="margin-top: 25px;">Buka Undangan</button>
+                </div>
+
+                <!-- Kiri: Bismillah & Al-Qur'an -->
+                <div class="back page-content" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="arabic" style="font-size: 1.2rem; margin-bottom: 15px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                    <div class="arabic" style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+                        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+                    </div>
+                    <p class="quran-text">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir." <br><strong style="display:block; margin-top:8px;">(QS. Ar-Rum: 21)</strong></p>
+                    
+                    <div style="margin-top: 25px;">
+                        <button class="btn mobile-only" onclick="panTo('right')">Lanjut Baca ➡️</button>
+                    </div>
+                </div>
+            </div>
+            
         </div>
+    </div>
+
+    <!-- Elemen Musik -->
+    <audio id="bg-music" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-btn" class="music-control" onclick="toggleMusic()" style="display: none;">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
     </div>
 
     <script>
         let isAnimating = false;
+        let viewState = 'cover'; // Status kamera: 'cover', 'left', 'right'
 
-        function flipNext(pageId) {
+        // Logika Kamera Pan & Scan
+        function updateView() {
+            const book = document.getElementById('book');
+            const isMobile = window.innerWidth < 700;
+            
+            if (viewState === 'cover') {
+                book.style.transform = 'translateX(0px)';
+            } else if (isMobile) {
+                // Di HP, geser buku agar salah satu halaman pas di tengah layar
+                if (viewState === 'left') {
+                    book.style.transform = 'translateX(320px)';
+                } else if (viewState === 'right') {
+                    book.style.transform = 'translateX(0px)';
+                }
+            } else {
+                // Di Laptop, posisikan buku persis di tengah agar 2 halaman terlihat
+                book.style.transform = 'translateX(160px)';
+            }
+            resizeScale();
+        }
+
+        // Buka Halaman Baru
+        function openBook(pageId) {
             if (isAnimating) return;
             isAnimating = true;
             
-            const page = document.getElementById(pageId);
-            page.classList.add('flipped');
+            document.getElementById(pageId).classList.add('flipped');
             
             if (pageId === 'page1') {
-                document.getElementById('book').classList.add('open');
-                resizeBook(); 
-                
-                // --- KODE PEMICU MUSIK ---
                 const music = document.getElementById('bg-music');
                 const musicBtn = document.getElementById('music-btn');
-                musicBtn.style.display = 'flex'; // Munculkan tombol musik
-                
-                if (music.paused) {
-                    music.play();
-                    musicBtn.classList.add('playing');
-                }
-                // -------------------------
+                musicBtn.style.display = 'flex';
+                if (music.paused) { music.play(); musicBtn.classList.add('playing'); }
             }
 
+            viewState = 'left'; // Setelah membalik, kamera fokus ke kiri
+            updateView();
+
             setTimeout(() => {
-                if (pageId === 'page1') page.style.zIndex = 1;
-                if (pageId === 'page2') page.style.zIndex = 2;
+                if (pageId === 'page1') document.getElementById('page1').style.zIndex = 1;
+                if (pageId === 'page2') document.getElementById('page2').style.zIndex = 2;
+                if (pageId === 'page3') document.getElementById('page3').style.zIndex = 3;
             }, 500);
 
             setTimeout(() => { isAnimating = false; }, 1000);
         }
 
-        function flipPrev(pageId) {
+        // Fungsi Tombol Geser Kamera (Khusus HP)
+        function panTo(side) {
+            viewState = side;
+            updateView();
+        }
+
+        // Tutup Halaman Sebelumnya
+        function prevPage(pageId) {
             if (isAnimating) return;
             isAnimating = true;
             
             const page = document.getElementById(pageId);
             
-            if (pageId === 'page1') page.style.zIndex = 3;
-            if (pageId === 'page2') page.style.zIndex = 2;
+            if (pageId === 'page3') page.style.zIndex = 2;
+            if (pageId === 'page2') page.style.zIndex = 3;
+            if (pageId === 'page1') page.style.zIndex = 4;
             
             page.classList.remove('flipped');
             
             if (pageId === 'page1') {
-                document.getElementById('book').classList.remove('open');
-                resizeBook(); // Memanggil efek Zoom In
+                viewState = 'cover';
+            } else {
+                viewState = 'right'; // Kembali fokus ke kanan
             }
+            updateView();
 
             setTimeout(() => { isAnimating = false; }, 1000);
         }
 
+        // Tutup Semua Halaman
         function closeAll() {
             if (isAnimating) return;
             isAnimating = true;
             
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
-            const book = document.getElementById('book');
+            document.getElementById('page3').classList.remove('flipped');
+            document.getElementById('page2').classList.remove('flipped');
+            document.getElementById('page1').classList.remove('flipped');
             
-            page1.style.zIndex = 3;
-            page2.style.zIndex = 2;
+            document.getElementById('page1').style.zIndex = 4;
+            document.getElementById('page2').style.zIndex = 3;
+            document.getElementById('page3').style.zIndex = 2;
             
-            page2.classList.remove('flipped');
-            page1.classList.remove('flipped');
-            book.classList.remove('open');
-            resizeBook(); // Memanggil efek Zoom In
+            viewState = 'cover';
+            updateView();
 
             setTimeout(() => { isAnimating = false; }, 1000);
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+            if (music.paused) {
+                music.play(); musicBtn.classList.add('playing');
+            } else {
+                music.pause(); musicBtn.classList.remove('playing');
+            }
         }
 
         function submitRSVP(event) {
@@ -442,46 +382,35 @@
             
             const newItem = document.createElement('div');
             newItem.className = 'wish-item';
-            newItem.innerHTML = `<strong>${nama}</strong> <span class="badge">${hadir}</span><p style="margin: 5px 0 0 0; color: #666;">${ucapan}</p>`;
-            
+            newItem.innerHTML = `<strong>${nama}</strong> <span class="badge">${hadir}</span><p style="margin: 5px 0 0 0; color: #555;">${ucapan}</p>`;
             list.insertBefore(newItem, list.firstChild);
             event.target.reset();
         }
 
-        function resizeBook() {
+        // Penyesuaian Ukuran Zoom
+        function resizeScale() {
             const wrapper = document.getElementById('scaleWrapper');
-            const book = document.getElementById('book');
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
+            const isMobile = windowWidth < 700;
             
-            // Logika Cinematic Zoom: Jika buku terbuka butuh ruang 680px, jika tertutup hanya butuh 340px
-            const isBookOpen = book.classList.contains('open');
-            const targetWidth = isBookOpen ? 680 : 340;
+            // Di HP lebar fokus 1 halaman (320px). Di PC fokus 2 halaman (640px)
+            let targetWidth = (viewState === 'cover' || isMobile) ? 320 : 640;
             
-            let scale = windowWidth / targetWidth; 
-            if (scale > 1) scale = 1; // Cegah terlalu besar di laptop
+            let scale = windowWidth / (targetWidth + 30); // 30px untuk ruang kosong/margin
             
-            // Amankan agar bagian bawah tidak terpotong
-            if (windowHeight < 570 * scale) {
-               scale = windowHeight / 570;
+            // Mengizinkan zoom lebih besar di HP agar terlihat sangat penuh
+            let maxScale = isMobile ? 1.3 : 1; 
+            if (scale > maxScale) scale = maxScale; 
+            
+            if (windowHeight < 560 * scale) {
+               scale = windowHeight / 560;
             }
-            
             wrapper.style.transform = `scale(${scale})`;
         }
 
-        window.addEventListener('resize', resizeBook);
-        setTimeout(resizeBook, 100); // Trigger pertama saat web dimuat
+        window.addEventListener('resize', updateView);
+        setTimeout(updateView, 100); 
     </script>
-<!-- Elemen Audio & Tombol Musik -->
-    <audio id="bg-music" loop>
-        <source src="musik.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="music-btn" class="music-control" onclick="toggleMusic()" style="display: none;">
-        <!-- Ikon Nada -->
-        <svg viewBox="0 0 24 24">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-        </svg>
-    </div>
 </body>
 </html>
