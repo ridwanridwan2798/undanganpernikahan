@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -212,6 +212,39 @@
             background-color: transparent; border: 1px solid var(--text-dark);
             color: var(--text-dark);
         }
+/* Tombol Musik Melayang */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            animation: spin 4s linear infinite;
+            animation-play-state: paused; /* Bawaan berhenti sebelum dibuka */
+        }
+
+        .music-control.playing {
+            animation-play-state: running;
+        }
+
+        /* Animasi Berputar */
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .music-control svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
     </style>
 </head>
 <body>
@@ -339,7 +372,18 @@
             
             if (pageId === 'page1') {
                 document.getElementById('book').classList.add('open');
-                resizeBook(); // Memanggil efek Zoom Out
+                resizeBook(); 
+                
+                // --- KODE PEMICU MUSIK ---
+                const music = document.getElementById('bg-music');
+                const musicBtn = document.getElementById('music-btn');
+                musicBtn.style.display = 'flex'; // Munculkan tombol musik
+                
+                if (music.paused) {
+                    music.play();
+                    musicBtn.classList.add('playing');
+                }
+                // -------------------------
             }
 
             setTimeout(() => {
@@ -427,5 +471,16 @@
         window.addEventListener('resize', resizeBook);
         setTimeout(resizeBook, 100); // Trigger pertama saat web dimuat
     </script>
+<!-- Elemen Audio & Tombol Musik -->
+    <audio id="bg-music" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-btn" class="music-control" onclick="toggleMusic()" style="display: none;">
+        <!-- Ikon Nada -->
+        <svg viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </div>
 </body>
 </html>
