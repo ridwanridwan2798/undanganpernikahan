@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Ical & Nurul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #1a1c20;
+            --light-bg: #faf8f5;
+            --text-dark: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            scrollbar-width: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle, #2a2d34 0%, #0a0a0a 100%);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .scale-wrapper {
+            position: relative;
+            transition: transform 0.5s ease;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .book {
+            width: 320px;
+            height: 520px;
+            position: relative;
+            perspective: 1500px;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .book.open {
+            transform: translateX(160px);
+        }
+
+        .page {
+            width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .front, .back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden;
+            background-color: var(--light-bg);
+            overflow-y: auto; overflow-x: hidden;
+        }
+
+        .front {
+            border-radius: 2px 12px 12px 2px;
+            border-left: 2px solid #ddd;
+            box-shadow: inset 10px 0 20px rgba(0,0,0,0.03), 5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            border-radius: 12px 2px 2px 12px;
+            border-right: 2px solid #ddd;
+            box-shadow: inset -10px 0 20px rgba(0,0,0,0.03), -5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .page-content {
+            padding: 25px 20px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .title-gold {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .quran-text {
+            font-size: 0.7rem; color: #555;
+            line-height: 1.4; margin-bottom: 15px; font-style: italic;
+        }
+
+        .cover-design {
+            background-color: var(--dark-bg);
+            color: var(--gold);
+            border: 6px solid #282b30;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        
+        .cover-design::before {
+            content: ''; position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid var(--gold);
+            pointer-events: none; border-radius: 2px 8px 8px 2px;
+        }
+
+        .cover-photo {
+            width: 180px; height: 230px;
+            object-fit: cover;
+            border-radius: 90px 90px 0 0;
+            border: 2px solid var(--gold);
+            margin: 15px 0;
+        }
+
+        .couple-name {
+    		font-family: 'Playfair Display', serif;
+    		font-size: 2.2rem; /* Ukuran saya kecilkan sedikit agar lebih pas dan elegan */
+    		margin: 0; 
+    		color: var(--gold);
+    		font-weight: 600; /* Menambahkan ketebalan huruf */
+	}
+
+        .couple-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .profile-col { width: 45%; }
+        
+        .profile-col img {
+            width: 70px; height: 70px;
+            border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--gold); padding: 2px;
+        }
+
+        .profile-col h3 {
+    		font-family: 'Playfair Display', serif;
+    		font-size: 1.2rem; /* Dikecilkan sedikit agar rapi */
+    		color: var(--text-dark);
+    		margin: 5px 0;
+    		font-weight: 600;
+	}
+
+        .profile-col p { font-size: 0.65rem; color: #666; margin: 0; line-height: 1.3;}
+        .divider-and { font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold); }
+
+        .event-box {
+            background: #fff; padding: 15px;
+            border-radius: 8px; border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .event-box h4 {
+            font-family: 'Playfair Display', serif; margin: 0 0 10px 0; font-size: 1rem;
+        }
+        .event-box p { font-size: 0.8rem; color: #555; margin: 5px 0; }
+        
+        .map-container iframe {
+            width: 100%; height: 130px; border: none; border-radius: 8px;
+        }
+
+        .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            border: 1px solid #ddd; border-radius: 6px;
+            font-family: inherit; font-size: 0.8rem;
+        }
+        .rsvp-form input:focus, .rsvp-form textarea:focus { outline: 1px solid var(--gold); }
+        
+        .guestbook {
+            margin-top: 15px; max-height: 140px; overflow-y: auto;
+            text-align: left; border-top: 1px dashed #ddd; padding-top: 10px;
+        }
+        .wish-item {
+            background: #f9f9f9; padding: 10px; border-radius: 6px;
+            margin-bottom: 8px; font-size: 0.75rem; border-left: 3px solid var(--gold);
+        }
+        .wish-item strong { color: var(--text-dark); }
+        .badge {
+            background: #eee; padding: 3px 6px; border-radius: 4px;
+            font-size: 0.6rem; float: right; color: #555;
+        }
+
+        .btn {
+            display: inline-block; padding: 10px 15px; width: 100%;
+            background-color: var(--gold); color: #fff; border-radius: 30px;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+            border: none; cursor: pointer; font-weight: 600;
+            transition: 0.3s; margin-top: 10px;
+        }
+        .btn:hover { background-color: #b8962c; }
+        .btn-outline {
+            background-color: transparent; border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scale-wrapper" id="scaleWrapper">
+        <div class="book" id="book">
+            
+            <!-- HALAMAN 3 (RSVP) -->
+            <div class="page" id="page3" style="z-index: 1;">
+                <div class="front page-content">
+                    <h2 class="title-gold">RSVP & Ucapan</h2>
+                    <p style="font-size: 0.75rem; margin-bottom: 15px;">Kehadiran & doa restu Anda sangat berarti bagi kami.</p>
+                    
+                    <form class="rsvp-form" onsubmit="submitRSVP(event)">
+                        <input type="text" id="nama" placeholder="Nama Anda" required>
+                        <select id="hadir">
+                            <option value="Hadir">Akan Hadir</option>
+                            <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                        </select>
+                        <textarea id="ucapan" rows="2" placeholder="Tulis doa & ucapan..." required></textarea>
+                        <button type="submit" class="btn">Kirim Pesan</button>
+                    </form>
+
+                    <!-- Data Keluarga Budi sudah dihapus, div guestbook dibiarkan kosong -->
+                    <div class="guestbook" id="guestbook-list">
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 2 (Detail Acara & Galeri/Penutup) -->
+            <div class="page" id="page2" style="z-index: 2;">
+                <!-- Sisi Depan -->
+                <div class="front page-content">
+                    <h2 class="title-gold">Detail Acara</h2>
+                    
+                    <div class="event-box">
+                        <h4>Akad Nikah & Resepsi</h4>
+                        <p><strong>SENIN, 21 September 2026</strong></p>
+                        <p>Pukul 10:00 WITA - Selesai</p>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+                        <p><strong>SALUTENGNGE, BATUPANGA DAALA</strong><br>Jl.Poros Tutar,Luyo, Polman</p>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d208.10204585698165!2d119.10238185099172!3d-3.3224792557423615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1789350464978!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+
+                    <button class="btn" onclick="flipNext('page2')">Isi Kehadiran (RSVP)</button>
+                </div>
+
+                <!-- Sisi Belakang (Tanpa Scroll) -->
+                <div class="back page-content" style="display: flex; flex-direction: column; justify-content: center; padding: 15px 20px;">
+                    
+                    <!-- FOTO LOKAL KE-4: PENUTUP -->
+                    <img src="penutup2.jpeg" alt="Terima Kasih" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                    
+                    <h2 class="title-gold" style="margin-bottom: 5px; font-size: 1rem;">Terima Kasih</h2>
+                    
+                    <p style="font-size: 0.75rem; color: #555; line-height: 1.4; margin: 5px 0 15px 0;">
+                        "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu."
+                    </p>
+                    
+                    <button class="btn btn-outline" onclick="flipPrev('page2')" style="margin-top: 0; padding: 8px 15px;">Kembali ke Acara</button>
+                    <button class="btn btn-outline" onclick="closeAll()" style="margin-top: 8px; padding: 8px 15px; border: none; color: #999;">Tutup Undangan</button>
+                    
+                </div>
+            </div>
+
+            <!-- HALAMAN 1 (Sampul Depan & Profil Islami) -->
+            <div class="page" id="page1" style="z-index: 3;">
+                
+                <!-- Sisi Depan -->
+                <div class="front cover-design page-content">
+                    <p style="font-family: 'Playfair Display'; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px;">WEDDING INVITATION</p>
+                    
+                    <!-- FOTO LOKAL KE-1: SAMPUL -->
+                    <img src="sampul.jpeg" alt="Cover Photo" class="cover-photo">
+                    
+                    <h2 class="couple-name">ICAL & NURUL</h2>
+                    
+                    <button class="btn" onclick="flipNext('page1')" style="margin-top: 30px;">Buka Undangan</button>
+                </div>
+
+                <!-- Sisi Belakang -->
+                <div class="back page-content">
+                    <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                    <p class="quran-text">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya..." <br><strong>(QS. Ar-Rum: 21)</strong></p>
+                    
+                    <p style="font-size: 0.75rem; color: #444; margin-bottom: 15px;">Assalamu'alaikum Warahmatullahi Wabarakatuh.<br>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+                    
+                    <div class="couple-row">
+                        <div class="profile-col">
+                            <!-- FOTO LOKAL KE-2: WANITA -->
+                            <img src="wanita.jpeg" alt="Mempelai Wanita">
+                            <h3>NURUL ALQAUZAR</h3>
+                            <p>Putra ke-2 dari<br>Bpk Bakhtiar & Ibu Darma. S</p>
+                        </div>
+                        
+                        <div class="divider-and">&</div>
+
+                        <div class="profile-col">
+                            <!-- FOTO LOKAL KE-3: PRIA -->
+                            <img src="pria.jpeg" alt="Mempelai Pria">
+                            <h3>ICAL</h3>
+                            <p>Putri ke-2 dari<br>Bpk Hamiruddin & Ibu Anti</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline" style="margin-top: 20px;" onclick="flipPrev('page1')">Kembali ke Sampul</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isAnimating = false;
+
+        function flipNext(pageId) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const page = document.getElementById(pageId);
+            page.classList.add('flipped');
+            
+            if (pageId === 'page1') {
+                document.getElementById('book').classList.add('open');
+                resizeBook(); // Memanggil efek Zoom Out
+            }
+
+            setTimeout(() => {
+                if (pageId === 'page1') page.style.zIndex = 1;
+                if (pageId === 'page2') page.style.zIndex = 2;
+            }, 500);
+
+            setTimeout(() => { isAnimating = false; }, 1000);
+        }
+
+        function flipPrev(pageId) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const page = document.getElementById(pageId);
+            
+            if (pageId === 'page1') page.style.zIndex = 3;
+            if (pageId === 'page2') page.style.zIndex = 2;
+            
+            page.classList.remove('flipped');
+            
+            if (pageId === 'page1') {
+                document.getElementById('book').classList.remove('open');
+                resizeBook(); // Memanggil efek Zoom In
+            }
+
+            setTimeout(() => { isAnimating = false; }, 1000);
+        }
+
+        function closeAll() {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            const book = document.getElementById('book');
+            
+            page1.style.zIndex = 3;
+            page2.style.zIndex = 2;
+            
+            page2.classList.remove('flipped');
+            page1.classList.remove('flipped');
+            book.classList.remove('open');
+            resizeBook(); // Memanggil efek Zoom In
+
+            setTimeout(() => { isAnimating = false; }, 1000);
+        }
+
+        function submitRSVP(event) {
+            event.preventDefault();
+            const nama = document.getElementById('nama').value;
+            const hadir = document.getElementById('hadir').value;
+            const ucapan = document.getElementById('ucapan').value;
+            const list = document.getElementById('guestbook-list');
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'wish-item';
+            newItem.innerHTML = `<strong>${nama}</strong> <span class="badge">${hadir}</span><p style="margin: 5px 0 0 0; color: #666;">${ucapan}</p>`;
+            
+            list.insertBefore(newItem, list.firstChild);
+            event.target.reset();
+        }
+
+        function resizeBook() {
+            const wrapper = document.getElementById('scaleWrapper');
+            const book = document.getElementById('book');
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // Logika Cinematic Zoom: Jika buku terbuka butuh ruang 680px, jika tertutup hanya butuh 340px
+            const isBookOpen = book.classList.contains('open');
+            const targetWidth = isBookOpen ? 680 : 340;
+            
+            let scale = windowWidth / targetWidth; 
+            if (scale > 1) scale = 1; // Cegah terlalu besar di laptop
+            
+            // Amankan agar bagian bawah tidak terpotong
+            if (windowHeight < 570 * scale) {
+               scale = windowHeight / 570;
+            }
+            
+            wrapper.style.transform = `scale(${scale})`;
+        }
+
+        window.addEventListener('resize', resizeBook);
+        setTimeout(resizeBook, 100); // Trigger pertama saat web dimuat
+    </script>
+</body>
+</html>
